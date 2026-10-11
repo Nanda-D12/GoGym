@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GoGym.Domain\GoGym.Domain.csproj" />
+    <ProjectReference Include="..\..\src\GoGym.Domain\GoGym.Domain.csproj" />
   </ItemGroup>
 
 </Project>
