@@ -4,17 +4,18 @@ namespace GoGym.Domain;
 
 public class Gym
 {
-    private readonly Guid _id;
     private readonly List<Guid> _roomIds = new();
     private readonly int _maxRooms;
     private readonly Guid _subscriptionId;
+    public Guid Id { get; }
 
     public Gym(int maxRooms, Guid subscriptionId, Guid? id = null)
     {
         _maxRooms = maxRooms;
         _subscriptionId = subscriptionId;
-        _id = id ?? Guid.NewGuid();
+        Id = id ?? Guid.NewGuid();
     }
+
 
     public ErrorOr<Success> AddRoom(Room room)
     {
