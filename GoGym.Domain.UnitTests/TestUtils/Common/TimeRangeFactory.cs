@@ -1,3 +1,4 @@
+using GoGym.Domain.Common.ValueObjects;
 using Throw;
 
 namespace GoGym.Domain.UnitTests.TestUtils.Common;

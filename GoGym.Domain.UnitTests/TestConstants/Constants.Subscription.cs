@@ -1,3 +1,5 @@
+using GoGym.Domain.SubscriptionAggregate;
+
 namespace GoGym.Domain.UnitTests.TestConstants;
 
 public static partial class Constants

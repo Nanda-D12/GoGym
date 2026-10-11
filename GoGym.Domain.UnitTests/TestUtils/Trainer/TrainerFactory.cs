@@ -1,3 +1,4 @@
+using GoGym.Domain.TrainerAggregate;
 using GoGym.Domain.UnitTests.TestConstants;
 
 namespace GoGym.Domain.UnitTests.TestUtils.Trainers;

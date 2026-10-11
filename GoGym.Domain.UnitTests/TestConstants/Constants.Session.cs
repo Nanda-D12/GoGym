@@ -1,4 +1,5 @@
 using System.Security.Cryptography;
+using GoGym.Domain.Common.ValueObjects;
 
 namespace GoGym.Domain.UnitTests.TestConstants;
 

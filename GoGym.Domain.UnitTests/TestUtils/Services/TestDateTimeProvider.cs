@@ -1,4 +1,6 @@
 
+using GoGym.Domain.Common.Interfaces;
+
 namespace GoGym.Domain.UnitTests.TestUtils.Services;
 
 public class TestDateTimeProvider : IDateTimeProvider

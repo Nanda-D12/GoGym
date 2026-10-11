@@ -1,4 +1,6 @@
 
+using GoGym.Domain.Common.ValueObjects;
+using GoGym.Domain.SessionAggregate;
 using GoGym.Domain.UnitTests.TestConstants;
 
 namespace GoGym.Domain.UnitTests.TestUtils.Sessions;

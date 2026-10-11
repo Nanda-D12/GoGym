@@ -1,3 +1,4 @@
+using GoGym.Domain.RoomAggregate;
 using GoGym.Domain.UnitTests.TestConstants;
 
 namespace GoGym.Domain.UnitTests.TestUtils.Rooms;

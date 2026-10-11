@@ -1,3 +1,4 @@
+using GoGym.Domain.SubscriptionAggregate;
 using GoGym.Domain.UnitTests.TestConstants;
 
 namespace GoGym.Domain.UnitTests.TestUtils.Subscriptions;
