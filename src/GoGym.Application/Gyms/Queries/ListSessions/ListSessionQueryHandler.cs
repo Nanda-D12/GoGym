@@ -1,6 +1,5 @@
 using ErrorOr;
 using GoGym.Application.Common.Interfaces;
-using GoGym.Domain.GymAggregate;
 using GoGym.Domain.SessionAggregate;
 using MediatR;
 
