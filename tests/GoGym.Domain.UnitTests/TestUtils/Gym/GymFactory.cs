@@ -8,7 +8,8 @@ public static class GymFactory
     public static Gym CreateGym(int maxRooms = Constants.Subscription.MaxRoomsFreeTier,
                                 Guid? id = null)
     {
-        var gym = new Gym(maxRooms: maxRooms,
+        var gym = new Gym(name: Constants.Gym.Name,
+                            maxRooms: maxRooms,
                             subscriptionId: Constants.Subscription.Id,
                             id: id ?? Constants.Gym.Id);
         return gym;

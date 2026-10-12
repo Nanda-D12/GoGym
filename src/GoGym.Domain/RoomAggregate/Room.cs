@@ -6,11 +6,12 @@ namespace GoGym.Domain.RoomAggregate;
 
 public class Room : AggregateRoot
 {
-    private readonly List<Guid> _sessionIds = new();
     private readonly Guid _gymId;
     private readonly int _maxDailySessions;
     private readonly Schedule _schedule = Schedule.Empty();
     public string Name { get; }
+
+    public List<Guid> SessionIds { get; } = new();
 
     public Room(string name, int maxDailySessions, Guid gymId, Guid? id = null) : base(id ?? Guid.NewGuid())
     {
@@ -21,16 +22,16 @@ public class Room : AggregateRoot
 
     public bool HasSession(Guid sessionId)
     {
-        return _sessionIds.Contains(sessionId);
+        return SessionIds.Contains(sessionId);
     }
     public ErrorOr<Success> ScheduleSession(Session session)
     {
-        Console.WriteLine($"Session Count: {_sessionIds.Count} and Max: {_maxDailySessions}");
-        if (_sessionIds.Contains(session.Id))
+        Console.WriteLine($"Session Count: {SessionIds.Count} and Max: {_maxDailySessions}");
+        if (SessionIds.Contains(session.Id))
         {
             return RoomErrors.CannotAddSameSession;
         }
-        if (_sessionIds.Count >= _maxDailySessions)
+        if (SessionIds.Count >= _maxDailySessions)
         {
             return RoomErrors.CannotAddMoreThanMaxDailySessions;
         }
@@ -42,7 +43,7 @@ public class Room : AggregateRoot
             return RoomErrors.SessionOverlapWithOtherSession;
         }
 
-        _sessionIds.Add(session.Id);
+        SessionIds.Add(session.Id);
 
         return Result.Success;
     }

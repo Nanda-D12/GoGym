@@ -12,5 +12,10 @@ public interface ISessionsRepository
         DateTime? startDateTime = null,
         DateTime? endDateTime = null
     );
+    Task<List<Session>> ListByGymIdAsync(
+        Guid gymId,
+        DateTime? startDateTime = null,
+        DateTime? endDateTime = null
+    );
     Task RemoveRangeAsync(List<Session> sessions);
 }
