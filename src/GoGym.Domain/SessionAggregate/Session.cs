@@ -11,13 +11,17 @@ public class Session : AggregateRoot
     private readonly Guid _trainerId;
     private readonly List<Reservation>  _reservations = new();
     private readonly int _maxParticipants;
-
+    public string Name { get; }
+    public string Description { get; }
+    public Guid RoomId { get; }
     public DateOnly Date { get; }
-
     public TimeRange Time { get; }
 
-    public Session(int maxParticipants, Guid trainerId, DateOnly date, TimeRange time, Guid? id = null) : base(id ?? Guid.NewGuid())
+    public Session(string name, string description, Guid roomId, int maxParticipants, Guid trainerId, DateOnly date, TimeRange time, Guid? id = null) : base(id ?? Guid.NewGuid())
     {
+        Name = name;
+        Description = description;
+        RoomId = roomId;
         _maxParticipants = maxParticipants;
         _trainerId = trainerId;
         Date = date;

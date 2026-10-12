@@ -1,5 +1,6 @@
 using ErrorOr;
 using GoGym.Domain.Common;
+using GoGym.Domain.Common.ValueObjects;
 using GoGym.Domain.SessionAggregate;
 
 namespace GoGym.Domain.TrainerAggregate;
@@ -17,6 +18,11 @@ public class Trainer : AggregateRoot
         _sessionIds = [];
     }
 
+    public bool IsTimeSlotFree(DateOnly date, TimeRange time)
+    {
+        return _schedule.CanBookTimeSlot(date, time);
+    }
+    
     public ErrorOr<Success> AddSessionToSchedule(Session session)
     {
         if (_sessionIds.Contains(session.Id))

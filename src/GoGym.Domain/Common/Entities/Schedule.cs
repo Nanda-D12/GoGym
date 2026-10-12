@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using ErrorOr;
 using GoGym.Domain.Common;
 using GoGym.Domain.Common.ValueObjects;
@@ -16,6 +17,16 @@ public class Schedule : Entity
     public static Schedule Empty()
     {
         return new Schedule(id: Guid.NewGuid());
+    }
+
+    internal bool CanBookTimeSlot(DateOnly date, TimeRange time)
+    {
+        if (!_calendar.TryGetValue(date, out var timeSlots))
+        {
+            return true;
+        }
+
+        return !timeSlots.Any(slot => slot.OverlapsWith(time));
     }
 
     internal ErrorOr<Success> BookTimeSlot(DateOnly date, TimeRange time)
