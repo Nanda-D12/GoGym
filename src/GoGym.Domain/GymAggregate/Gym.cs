@@ -8,18 +8,17 @@ public class Gym : AggregateRoot
 {
     private readonly List<Guid> _roomIds = new();
     private readonly int _maxRooms;
-    private readonly Guid _subscriptionId;
+    public Guid SubscriptionId { get; }
 
     public Gym(int maxRooms, Guid subscriptionId, Guid? id = null) : base(id ?? Guid.NewGuid())
     {
         _maxRooms = maxRooms;
-        _subscriptionId = subscriptionId;
+        SubscriptionId = subscriptionId;
     }
 
 
     public ErrorOr<Success> AddRoom(Room room)
     {
-        // check if max rooms is filled
         if(_roomIds.Count >= _maxRooms)
         {
             return GymErrors.CannotAddMoreRoomsThanSubscriptionAllow;
@@ -31,6 +30,23 @@ public class Gym : AggregateRoot
 
         _roomIds.Add(room.Id);
         
+        return Result.Success;
+    }
+
+    public bool HasRoom(Guid roomId)
+    {
+        return _roomIds.Contains(roomId);
+    }
+
+    public ErrorOr<Success> RemoveRoom(Room room)
+    {
+        if (!_roomIds.Contains(room.Id))
+        {
+            return Error.NotFound(description: "Room not found.");
+        }
+
+        _roomIds.Remove(room.Id);
+
         return Result.Success;
     }
 }

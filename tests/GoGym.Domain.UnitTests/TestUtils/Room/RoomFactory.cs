@@ -10,6 +10,7 @@ public static class RoomFactory
                             Guid? id = null)
     {
         var room = new Room(
+            name: Constants.Room.Name,
             maxDailySessions: maxDailySessions,
             gymId: gymId ?? Constants.Gym.Id,
             id: id ?? Constants.Room.Id

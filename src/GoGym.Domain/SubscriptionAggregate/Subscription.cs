@@ -18,6 +18,10 @@ public class Subscription : AggregateRoot
         _maxGyms = subscriptionType.MaxGyms;
     }
 
+    public int GetMaxDailySessions()
+    {
+        return _subscriptionType.MaxDailySessions;
+    }
     public ErrorOr<Success> AddGym(Gym gym)
     {
         if (_gymIds.Count >= _maxGyms)
