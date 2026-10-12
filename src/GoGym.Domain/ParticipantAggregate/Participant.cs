@@ -1,5 +1,7 @@
+using System.Runtime.CompilerServices;
 using ErrorOr;
 using GoGym.Domain.Common;
+using GoGym.Domain.Common.ValueObjects;
 using GoGym.Domain.SessionAggregate;
 
 namespace GoGym.Domain.ParticipantAggregate;
@@ -43,6 +45,11 @@ public class Participant : AggregateRoot
         return SessionIds.Contains(sessionId);
     }
 
+    public bool IsTimeSlotFree(DateOnly date, TimeRange time)
+    {
+        return _schedule.CanBookTimeSlot(date, time);
+    }    
+    
     public ErrorOr<Success> RemoveFromSchedule(Session session)
     {
         if (!HasReservationForSession(session.Id))
