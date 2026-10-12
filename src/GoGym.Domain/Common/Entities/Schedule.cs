@@ -46,4 +46,19 @@ public class Schedule : Entity
         return Result.Success;
     }
 
+    internal ErrorOr<Success> RemoveBooking(DateOnly date, TimeRange time)
+    {
+        if(!_calendar.TryGetValue(date, out var timeslots) || !timeslots.Contains(time))
+        {
+            return Error.NotFound(description: "Booking not found.");
+        }
+
+        if (!timeslots.Remove(time))
+        {
+            return Error.Unexpected();
+        }
+
+        return Result.Success;
+    }
+
 }

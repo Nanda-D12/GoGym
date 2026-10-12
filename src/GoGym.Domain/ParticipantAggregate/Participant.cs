@@ -6,20 +6,21 @@ namespace GoGym.Domain.ParticipantAggregate;
 public class Participant : AggregateRoot
 {
     private readonly Guid _userId;
-    private readonly List<Guid> _sessionIds;
     private readonly Schedule _schedule;
+    public List<Guid> SessionIds { get; }
 
     public Participant(Guid userId, Guid? id = null) : base(id ?? Guid.NewGuid())
     {
         _userId = userId;
         _schedule = Schedule.Empty();
-        _sessionIds = [];
+        SessionIds = [];
     }
+
 
     public ErrorOr<Success> AddSessionToSchedule(Session session)
     {
 
-        if (_sessionIds.Contains(session.Id))
+        if (SessionIds.Contains(session.Id))
         {
             return ParticipantErrors.CannotAddSameSession;
         }
@@ -32,8 +33,32 @@ public class Participant : AggregateRoot
                 : scheduleSessionResult.Errors;
         }
 
-        _sessionIds.Add(session.Id);
+        SessionIds.Add(session.Id);
         
+        return Result.Success;
+    }
+
+    public bool HasReservationForSession(Guid sessionId)
+    {
+        return SessionIds.Contains(sessionId);
+    }
+
+    public ErrorOr<Success> RemoveFromSchedule(Session session)
+    {
+        if (!HasReservationForSession(session.Id))
+        {
+            return Error.NotFound(description: "Session not found.");
+        }
+
+        var removeBookingResult = _schedule.RemoveBooking(session.Date, session.Time);
+
+        if (removeBookingResult.IsError)
+        {
+            return removeBookingResult.Errors;
+        }
+
+        SessionIds.Remove(session.Id);
+
         return Result.Success;
     }
 }
