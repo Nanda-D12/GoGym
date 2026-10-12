@@ -7,25 +7,26 @@ namespace GoGym.Domain.SubscriptionAggregate;
 public class Subscription : AggregateRoot
 {
     private readonly List<Guid> _gymIds = new();
-    private readonly SubscriptionType _subscriptionType;
     private readonly int _maxGyms;
     private readonly Guid _adminId;
 
+    public SubscriptionType SubscriptionType { get; }
+
     public Subscription(SubscriptionType subscriptionType, Guid adminId, Guid? id = null) : base(id ?? Guid.NewGuid())
     {
-        _subscriptionType = subscriptionType;
+        SubscriptionType = subscriptionType;
         _adminId = adminId;
         _maxGyms = subscriptionType.MaxGyms;
     }
 
     public int GetMaxRooms()
     {
-        return _subscriptionType.MaxRooms;
+        return SubscriptionType.MaxRooms;
     }
 
     public int GetMaxDailySessions()
     {
-        return _subscriptionType.MaxDailySessions;
+        return SubscriptionType.MaxDailySessions;
     }
 
     public bool HasGym(Guid gymId)

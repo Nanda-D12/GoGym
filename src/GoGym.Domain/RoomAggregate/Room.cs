@@ -6,18 +6,19 @@ namespace GoGym.Domain.RoomAggregate;
 
 public class Room : AggregateRoot
 {
-    private readonly Guid _gymId;
     private readonly int _maxDailySessions;
     private readonly Schedule _schedule = Schedule.Empty();
     public string Name { get; }
 
     public List<Guid> SessionIds { get; } = new();
 
+    public Guid GymId { get; }
+
     public Room(string name, int maxDailySessions, Guid gymId, Guid? id = null) : base(id ?? Guid.NewGuid())
     {
         Name = name;
         _maxDailySessions = maxDailySessions;
-        _gymId = gymId;
+        GymId = gymId;
     }
 
     public bool HasSession(Guid sessionId)
