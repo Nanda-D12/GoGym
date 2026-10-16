@@ -16,8 +16,7 @@ public class ParticipantConfiguration : IEntityTypeConfiguration<Participant>
         builder.Property(p => p.Id)
                 .ValueGeneratedNever();
 
-        builder.Property("_userId")
-                .HasColumnName("UserId");
+        builder.Property(p => p.UserId);
 
         builder.Property<List<Guid>>(p => p.SessionIds)
                 .HasListOfIdsConverter();

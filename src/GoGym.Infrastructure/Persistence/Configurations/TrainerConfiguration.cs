@@ -16,8 +16,7 @@ public class TrainerConfiguration : IEntityTypeConfiguration<Trainer>
         builder.Property(t => t.Id)
                 .ValueGeneratedNever();
 
-        builder.Property("_userId")
-                .HasColumnName("UserId");
+        builder.Property(t => t.UserId);
 
         builder.Property<List<Guid>>("_sessionIds")
                 .HasColumnName("SessiondIds")

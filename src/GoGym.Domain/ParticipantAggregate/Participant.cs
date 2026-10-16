@@ -7,13 +7,14 @@ using GoGym.Domain.SessionAggregate;
 namespace GoGym.Domain.ParticipantAggregate;
 public class Participant : AggregateRoot
 {
-    private readonly Guid _userId;
     private readonly Schedule _schedule = Schedule.Empty();
     public List<Guid> SessionIds { get; } = new();
 
+    public Guid UserId { get; }
+
     public Participant(Guid userId, Guid? id = null) : base(id ?? Guid.NewGuid())
     {
-        _userId = userId;
+        UserId = userId;
         _schedule = Schedule.Empty();
         SessionIds = [];
     }

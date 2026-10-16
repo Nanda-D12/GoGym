@@ -13,8 +13,7 @@ public class AdminConfiguration : IEntityTypeConfiguration<Admin>
         builder.Property(a => a.Id)
                 .ValueGeneratedNever();
 
-        builder.Property("_userId")
-                .HasColumnName("UserId");
+        builder.Property(a => a.UserId);
 
         builder.Property(a => a.SubscriptionId);
     }

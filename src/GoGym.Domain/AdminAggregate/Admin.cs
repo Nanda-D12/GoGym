@@ -6,12 +6,13 @@ namespace GoGym.Domain.AdminAggregate;
 
 public class Admin : AggregateRoot
 {
-    private readonly Guid _userId;
     public Guid? SubscriptionId { get; private set; }
+
+    public Guid UserId { get; }
 
     public Admin(Guid userId, Guid? subscriptionId = null, Guid? id = null) : base(id ?? Guid.NewGuid())
     {
-        _userId = userId;
+        UserId = userId;
         SubscriptionId = subscriptionId;
     }
 

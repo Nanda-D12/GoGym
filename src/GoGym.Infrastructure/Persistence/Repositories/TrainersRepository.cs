@@ -1,4 +1,6 @@
 using GoGym.Application.Common.Interfaces;
+using GoGym.Application.Profiles.Common;
+using GoGym.Domain.Profiles;
 using GoGym.Domain.TrainerAggregate;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,6 +24,15 @@ public class TrainersRepository : ITrainersRepository
     public async Task<Trainer?> GetByIdAsync(Guid id)
     {
         return await _dbContext.Trainers.FirstOrDefaultAsync(t => t.Id == id);
+    }
+
+    public async Task<Profile?> GetProfileByUserIdAsync(Guid userId)
+    {
+        var trainer = await _dbContext.Trainers
+                        .AsNoTracking()
+                        .FirstOrDefaultAsync(trainer => trainer.UserId == userId);
+
+        return trainer is null ? null : new Profile(trainer.Id, ProfileType.Trainer);
     }
 
     public async Task RemoveAsync(Trainer trainer)

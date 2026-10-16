@@ -1,5 +1,7 @@
 using GoGym.Application.Common.Interfaces;
+using GoGym.Application.Profiles.Common;
 using GoGym.Domain.AdminAggregate;
+using GoGym.Domain.Profiles;
 using Microsoft.EntityFrameworkCore;
 
 namespace GoGym.Infrastructure.Persistence.Repositories;
@@ -25,6 +27,15 @@ public class AdminsRepository : IAdminsRepository
                         .FirstOrDefaultAsync(a => a.Id == id);
 
         return admin;
+    }
+
+    public async Task<Profile?> GetProfileByUserIdAsyc(Guid userId)
+    {
+        var admin = await _dbContext.Admins
+                        .AsNoTracking()
+                        .FirstOrDefaultAsync(admin => admin.UserId == userId);
+
+        return admin is null ? null : new Profile(admin.Id, ProfileType.Admin);
     }
 
     public async Task UpdateAsync(Admin admin)
