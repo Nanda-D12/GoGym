@@ -26,4 +26,6 @@ public abstract class ValueObject
 
         return hashCode.ToHashCode();
     }
+
+    protected ValueObject() {}
 }

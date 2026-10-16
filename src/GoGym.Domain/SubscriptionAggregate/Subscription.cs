@@ -49,4 +49,6 @@ public class Subscription : AggregateRoot
 
         return Result.Success;
     }
+
+    public Subscription() {}
 }

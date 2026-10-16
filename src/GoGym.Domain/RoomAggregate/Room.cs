@@ -8,7 +8,7 @@ public class Room : AggregateRoot
 {
     private readonly int _maxDailySessions;
     private readonly Schedule _schedule = Schedule.Empty();
-    public string Name { get; }
+    public string Name { get; } = String.Empty;
 
     public List<Guid> SessionIds { get; } = new();
 
@@ -48,4 +48,6 @@ public class Room : AggregateRoot
 
         return Result.Success;
     }
+
+    private Room() {}
 }

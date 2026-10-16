@@ -9,4 +9,6 @@ public class Reservation : Entity
     {
         ParticipantId = participantId;
     }
+
+    private Reservation() {}
 }

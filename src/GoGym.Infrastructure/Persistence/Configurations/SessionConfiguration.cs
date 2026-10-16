@@ -16,7 +16,7 @@ public class SessionConfiguration : IEntityTypeConfiguration<Session>
 
         builder.Property(s => s.TrainerId);
 
-        builder.OwnsMany<Reservation>("_reservation", rb =>
+        builder.OwnsMany<Reservation>("_reservations", rb =>
         {
             rb.ToTable("SessionReservations");
             
@@ -34,7 +34,11 @@ public class SessionConfiguration : IEntityTypeConfiguration<Session>
 
         builder.Property(s => s.Date);
 
-        builder.Property(s => s.Time);
+        builder.OwnsOne(s => s.Time, tb =>
+        {
+            tb.Property(t => t.Start).HasColumnName("StartTime");
+            tb.Property(t => t.End).HasColumnName("EndTime");
+        });
 
         builder.Property(s => s.Name);
 

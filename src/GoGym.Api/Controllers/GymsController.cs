@@ -41,7 +41,7 @@ public class GymsController : ApiController
         );
     }
 
-    [HttpGet("{gymId: guid}")]
+    [HttpGet("{gymId:guid}")]
     public async Task<IActionResult> GetGym(Guid gymId, Guid subscriptionId)
     {
         var query = new GetGymQuery(subscriptionId, gymId);

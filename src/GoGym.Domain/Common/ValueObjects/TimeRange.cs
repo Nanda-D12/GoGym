@@ -39,4 +39,6 @@ public class TimeRange : ValueObject
         yield return Start;
         yield return End;
     }
+
+    private TimeRange() {}
 }

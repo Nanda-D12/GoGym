@@ -9,7 +9,7 @@ public class Gym : AggregateRoot
 {
     private readonly int _maxRooms;
     private readonly List<Guid> _trainerIds = new();
-    public string Name { get; }    
+    public string Name { get; } = string.Empty;
     public Guid SubscriptionId { get; }
 
     public List<Guid> RoomIds { get; } = new();
@@ -66,4 +66,6 @@ public class Gym : AggregateRoot
 
         return Result.Success;
     }
+
+    private Gym() {}
 }

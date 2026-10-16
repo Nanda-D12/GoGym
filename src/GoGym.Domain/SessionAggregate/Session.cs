@@ -10,8 +10,8 @@ public class Session : AggregateRoot
 {
     private readonly List<Reservation>  _reservations = new();
 
-    public string Name { get; }
-    public string Description { get; }
+    public string Name { get; } = String.Empty;
+    public string Description { get; } = String.Empty;
     public Guid RoomId { get; }
     public DateOnly Date { get; }
     public TimeRange Time { get; }
@@ -74,4 +74,6 @@ public class Session : AggregateRoot
 
         return Result.Success;
     }
+
+    private Session() {}
 }

@@ -1,6 +1,8 @@
 using GoGym.Application.Common.Interfaces;
+using GoGym.Domain.Common.Interfaces;
 using GoGym.Infrastructure.Persistence;
 using GoGym.Infrastructure.Persistence.Repositories;
+using GoGym.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,7 +13,15 @@ public static class DependencyInjection
     public static IServiceCollection AddInfraStructure(this IServiceCollection services)
     {
         services
-            .AddPersistence();
+            .AddPersistence()
+            .AddServices();
+
+        return services;
+    }
+
+    public static IServiceCollection AddServices(this IServiceCollection services)
+    {
+        services.AddScoped<IDateTimeProvider, SystemDateTimeProvider>();
 
         return services;
     }

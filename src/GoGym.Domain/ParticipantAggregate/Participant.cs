@@ -8,8 +8,8 @@ namespace GoGym.Domain.ParticipantAggregate;
 public class Participant : AggregateRoot
 {
     private readonly Guid _userId;
-    private readonly Schedule _schedule;
-    public List<Guid> SessionIds { get; }
+    private readonly Schedule _schedule = Schedule.Empty();
+    public List<Guid> SessionIds { get; } = new();
 
     public Participant(Guid userId, Guid? id = null) : base(id ?? Guid.NewGuid())
     {
@@ -68,4 +68,6 @@ public class Participant : AggregateRoot
 
         return Result.Success;
     }
+
+    private Participant() {}
 }
