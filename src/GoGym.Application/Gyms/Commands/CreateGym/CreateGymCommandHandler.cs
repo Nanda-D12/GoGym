@@ -5,7 +5,7 @@ using MediatR;
 
 namespace GoGym.Application.Gyms.Commands.CreateGym;
 
-public class CreateGymCommandHandler : IRequestHandler<CreateGymCommand, ErrorOr<Created>>
+public class CreateGymCommandHandler : IRequestHandler<CreateGymCommand, ErrorOr<Gym>>
 {
     private readonly ISubscriptionsRepository _subscriptionsRepository;
 
@@ -14,7 +14,7 @@ public class CreateGymCommandHandler : IRequestHandler<CreateGymCommand, ErrorOr
         _subscriptionsRepository = subscriptionsRepository;
     }
 
-    public async Task<ErrorOr<Created>> Handle(CreateGymCommand command, CancellationToken cancellationToken)
+    public async Task<ErrorOr<Gym>> Handle(CreateGymCommand command, CancellationToken cancellationToken)
     {
         var subscription = await _subscriptionsRepository.GetByIdAsync(command.SubscriptionId);
 
@@ -36,6 +36,6 @@ public class CreateGymCommandHandler : IRequestHandler<CreateGymCommand, ErrorOr
 
         await _subscriptionsRepository.UpdateAsync(subscription);
 
-        return Result.Created;
+        return gym;
     }
 }

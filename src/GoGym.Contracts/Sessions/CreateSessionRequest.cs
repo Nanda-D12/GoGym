@@ -1,6 +1,6 @@
 namespace GoGym.Contracts.Sessions;
 
-public record CreateSession (
+public record CreateSessionRequest (
     string Name,
     string Description,
     int MaxParticipants,

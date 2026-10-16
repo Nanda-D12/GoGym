@@ -7,4 +7,4 @@ namespace GoGym.Application.Subscriptions.Commands;
 public record CreateSubscriptionCommand (
     SubscriptionType SubscriptionType,
     Guid AdminId
-) : IRequest<ErrorOr<Created>>;
+) : IRequest<ErrorOr<Subscription>>;

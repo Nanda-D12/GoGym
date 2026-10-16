@@ -1,6 +1,6 @@
 namespace GoGym.Contracts.Subscriptions;
 
-public record SessionResponse (
+public record SubscriptionResponse (
     Guid Id,
     SubscriptionType SubscriptionType
 );
