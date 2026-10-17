@@ -6,6 +6,7 @@ using GoGym.Domain.RoomAggregate;
 using GoGym.Domain.SessionAggregate;
 using GoGym.Domain.SubscriptionAggregate;
 using GoGym.Domain.TrainerAggregate;
+using GoGym.Infrastructure.Persistence.Outbox;
 using Microsoft.EntityFrameworkCore;
 
 namespace GoGym.Infrastructure.Persistence;
@@ -19,6 +20,7 @@ public class GoGymDbContext : DbContext
     public DbSet<Trainer> Trainers { get; set; }
     public DbSet<Participant> Participants { get; set; }
     public DbSet<Admin> Admins { get; set; }
+    public DbSet<OutboxMessaage> OutboxMessaages { get; set; } = null!;
     public GoGymDbContext(DbContextOptions options) : base(options)
     {
         
